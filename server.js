@@ -33,10 +33,20 @@ app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 /*
  * JSON API Endpoints
  */
+app.get('/api/profile', function(req, res) {
+ if (err) { return console.log("An error occured: " + err); }
+ res.json(profile);
+});
+
 
 app.get('/api', function api_index(req, res) {
   // TODO: Document all your api endpoints below
@@ -52,6 +62,7 @@ app.get('/api', function api_index(req, res) {
     ]
   });
 });
+
 
 /**********
  * SERVER *

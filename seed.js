@@ -16,16 +16,19 @@ var new_profile = {
   },
   {
     name: "Bailey",
-    type: "Cat",
+    type: "Dog",
     breed: "Lab"
   }]
 };
 
-db.Profile.create(new_profile, function(err, profile) {
-  if (err){
-    return console.log("Error:", err);
-  }
+db.Profile.remove({}, function(err, profiles) {
+  console.log('removed all authors');
+  db.Profile.create(new_profile, function(err, profile) {
+    if (err){
+      return console.log("Error:", err);
+    }
 
-   console.log("Created new profile", profile._id);
-   process.exit(); // we're all done! Exit the program.
+     console.log("Created new profile", profile._id);
+     process.exit(); // we're all done! Exit the program.
+  });
 });
